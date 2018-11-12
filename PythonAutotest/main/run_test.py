@@ -5,6 +5,7 @@ sys.path.append('E:/pythonworkspace/PythonAutotest')
 from base.run_method import RunMethod
 from data.get_data import GetData
 from util.common import CommonUtil
+import json
 class RunTest():
 	def __init__(self):
 		self.run_method = RunMethod()
@@ -32,22 +33,26 @@ class RunTest():
 			# print data
 			expect = self.data.get_expect_data(i)
 			#获取header(默认demo)
-			header = self.data.demo_header()
+			# header = self.data.demo_header()
 			#获取excel中指定header
-			# header = self.data.is_header(i)
+			header = self.data.is_header(i)
 			# print header
 			# #判断is_run的值为true时执行
 			if is_run:
 				res = self.run_method.run_main(method,url,data,header)
-				# print res
+				#打印结果并转码为字符串类型
+				# print res.text.encode('unicode-escape').decode('string_escape')
 				#判断返回结果与预期结果比对
 				if self.com_util.is_contain(expect,res):
-					print "pass"
+					self.data.write_result(i, 'pass')
 				else:
-					print "false"
+					self.data.write_result(i, 'false')
+					
 
 
 				
 if __name__ == '__main__':
 	run = RunTest()
 	run.go_on_run()
+
+	
