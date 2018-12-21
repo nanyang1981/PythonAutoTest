@@ -5,6 +5,8 @@ from util.operation_json import OperationJson
 class GetData:
 	def __init__(self):
 		self.opera_excel = OperationExcel()
+		global host
+		host = 'http://192.168.1.11:8050'
 	#获取excel行数，case个数
 	def get_case_lines(self):
 		return self.opera_excel.get_lines()
@@ -24,7 +26,11 @@ class GetData:
 	def is_header(self,row):
 		col = int(dataconfig.get_header())
 		header = self.opera_excel.get_cell_value(row,col)
-		if header == 'yes':
+		if header == 'login':
+			header = dataconfig.get_header_value()
+			return header
+		elif header == 'load':
+			header = dataconfig.get_header_value_load()
 			return header
 		else:
 			return None
@@ -39,7 +45,7 @@ class GetData:
 	def get_request_url(self,row):
 		col = int(dataconfig.get_url())
 		url = self.opera_excel.get_cell_value(row,col)
-		return url
+		return host+url
 
 	#获取请求数据
 	def get_request_data(self,row):
@@ -102,11 +108,11 @@ class GetData:
 			return None
 		else:
 			return data
-	#默认header
-	def demo_header(self):
-		demo = dataconfig.get_header_value()
-		return demo
 
+	#写入结果
+	def write_result(self,row,value):
+		col = int(dataconfig.get_result())
+		self.opera_excel.write_value(row, col, value)
 
 if __name__ == '__main__':
 	op = GetData()

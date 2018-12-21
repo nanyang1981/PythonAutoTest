@@ -56,6 +56,7 @@ def get_result():
 	return global_var.result
 
 def get_header_value():
+	
 	header = {
 		'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
 		'Accept-Encoding':'gzip, deflate',
@@ -65,5 +66,20 @@ def get_header_value():
 		'Proxy-Connection':'keep-alive',
 		'Upgrade-Insecure-Requests':'1',
 		'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.92 Safari/537.36'
+	}
+	return header
+
+def get_header_value_load():
+	securit_key = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiJqYWRtaW4xIiwiT3JnSUQiOiJvcmcwMDEiLCJDbGllbnRJUCI6IjE5Mi4xNjguMS44MCIsImlhdCI6MTU0NTM1Njg3NH0.b8q9hmXlrrtOuSKbzZgP_IngEzBACIKodC41t2ce2f4'
+	header = {
+		'Host':'192.168.1.11:8050',
+		'Connection':'keep-alive',
+		'Accept':'application/json',
+		'Authorization':securit_key,
+		'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
+		'Content-Type':'application/json',
+		'Referer':'http://192.168.1.11:8050/agents',
+		'Accept-Encoding':'gzip, deflate',
+		'Accept-Language':'zh-CN,zh;q=0.9'
 	}
 	return header

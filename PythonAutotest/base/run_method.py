@@ -10,6 +10,7 @@ class RunMethod:
 			res = requests.post(url=url,data=data,headers=header)
 		else:
 			res = requests.post(url=url,data=data)
+		#不要修改返回出去的类型，会影响预期结果的比对
 		return res.json()
 
 	#get请求
@@ -21,6 +22,7 @@ class RunMethod:
 		else:
 			res = requests.get(url=url,data=data)
 			# print res.status_code
+		#不要修改返回出去的类型，会影响预期结果的比对
 		return res.json()
 		# return res
 	
@@ -30,10 +32,11 @@ class RunMethod:
 			res = self.post_main(url,data,header)
 		else:
 			res = self.get_main(url,data,header)
+		#不要修改返回出去的类型，会影响预期结果的比对
 		return json.dumps(res, ensure_ascii=False, sort_keys=True, indent=4)
 		# return res
 
-
+	
 
 
 
@@ -47,6 +50,7 @@ if __name__=='__main__':		#入口
 		"mobile": "2134890887654",
 		"cart": "11"
 	}
+
 	headers={
 		'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
 		'Accept-Encoding':'gzip, deflate',
@@ -61,4 +65,6 @@ if __name__=='__main__':		#入口
 	
 	run =RunMethod()
 
-	print run.run_main('POST',url,data,headers)
+	res = run.run_main('POST',url,data,headers)
+
+	print res
