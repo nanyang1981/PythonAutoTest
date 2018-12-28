@@ -14,9 +14,8 @@ class RunTest():
 		self.data = GetData()
 		self.com_util = CommonUtil()
 		self.send_mai = SendEmail()
-
-
-	# 程序执行
+		# print(self.data.get_request_url(1))
+# 程序执行
 	def go_on_run(self):
 		#结果
 		res = None
@@ -30,20 +29,25 @@ class RunTest():
 		for i in range(1,rows_count):
 			#获取是否执行
 			is_run = self.data.get_is_run(i)
-			# print is_run
+			# print (is_run)
 			# #判断is_run的值为true时执行
 			if is_run:
 					# print i
 				#获取url
 				url = self.data.get_request_url(i)
-				# print url
+				# print (url)
 				#获取请求类型
 				method = self.data.get_request_method(i)
 				# print method
 				#获取数据
-				data = self.data.get_request_data(i)
-				# print data
+				request_data = self.data.get_data_for_json(i)
+				print(request_data)
+				print(type(request_data))
+				break
 				expect = self.data.get_expect_data(i)
+				# print(expect)
+				# print(type(expect))
+				# break
 				#获取header(默认demo)
 				# header = self.data.demo_header()
 				#获取excel中指定header
@@ -61,8 +65,8 @@ class RunTest():
 					#将获取到的依赖case响应数据赋值给依赖key
 					request_data[depend_key] = depend_response_data
 				#获取响应数据
-				res = self.run_method.run_main(method,url,data,header)
-				# print res
+				res = self.run_method.run_main(method,url,request_data,header)
+				# print (res)
 				#打印结果并转码为字符串类型
 				# print res.text.encode('unicode-escape').decode('string_escape')
 
@@ -78,7 +82,6 @@ class RunTest():
 		#将比对出的结果写入邮件并发送
 		# self.send_mai.send_mail(['2848958229@qq.com'], "第一封测试报告邮件", "此次共运行接口个数为：%s，通过个数为：%s，失败个数为：%s，通过率为：%s，失败率为：%s。"%(count_num,pass_num,fail_num,pass_result,fail_result))
 		# self.send_mai.send_main(pass_count, fail_count)
-
 
 
 				

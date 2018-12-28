@@ -1,10 +1,15 @@
 #coding:utf-8
+import sys
+sys.path.append('E:/pythonworkspace/PythonAutotest')
 from util.operation_excel import OperationExcel
-import dataconfig
+from data import dataconfig
 from util.operation_json import OperationJson
+from util.connect_db import OperationDB
+import json
 class GetData:
 	def __init__(self):
 		self.opera_excel = OperationExcel()
+		self.data = dataconfig
 		global host
 		host = 'http://192.168.1.11:8050'
 	#获取excel行数，case个数
@@ -13,8 +18,9 @@ class GetData:
 
 	#获取是否执行
 	def get_is_run(self,row):
+		# print("this is a test")
 		flag = None
-		col = int(dataconfig.get_run())
+		col = int(self.data.get_run())
 		run_model = self.opera_excel.get_cell_value(row,col)
 		if run_model == 'yes':
 			flag = True
@@ -50,7 +56,7 @@ class GetData:
 	#获取请求数据
 	def get_request_data(self,row):
 		col = int(dataconfig.get_data())
-		data = self.opera_excel.get_cell_value(row,col).encode('utf-8')
+		data = self.opera_excel.get_cell_value(row,col)
 		if data == '':
 			return None
 		else:
@@ -60,7 +66,7 @@ class GetData:
 	def get_data_for_json(self,row):
 		opera_json = OperationJson()
 		request_data = opera_json.get_data(self.get_request_data(row))
-		return request_data
+		return str(request_data)
 
 	#获取预期结果
 	def get_expect_data(self,row):
@@ -71,16 +77,17 @@ class GetData:
 		return expect
 
 
-#通过sql获取预期结果
-	# def get_expcet_data_for_mysql(self,row):
-	# 	op_mysql = OperationMysql()
-	# 	sql = self.get_expcet_data(row)
-	# 	res = op_mysql.search_one(sql)
-	# 	return res.decode('unicode-escape')
-	#
-	# def write_result(self,row,value):
-	# 	col = int(data_config.get_result())
-	# 	self.opera_excel.write_value(row,col,value)
+	#通过sql获取预期结果
+	def get_expect_data_for_DB(self,row):
+		op_DB = OperationDB()
+		sql = self.get_expect_data(row)
+		res = op_DB.search_one(sql)
+		return res
+	
+
+	def write_result(self,row,value):
+		col = int(dataconfig.get_result())
+		self.opera_excel.write_value(row,col,value)
 
 	#获取依赖数据的key
 	def get_depend_key(self,row):
@@ -109,11 +116,7 @@ class GetData:
 		else:
 			return data
 
-	#写入结果
-	def write_result(self,row,value):
-		col = int(dataconfig.get_result())
-		self.opera_excel.write_value(row, col, value)
 
 if __name__ == '__main__':
 	op = GetData()
-	print op.get_request_url(1)
+	print(type(op.get_data_for_json(6)))

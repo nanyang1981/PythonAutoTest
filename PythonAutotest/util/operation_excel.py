@@ -72,4 +72,4 @@ class OperationExcel:
 if __name__ == '__main__':
 	opers = OperationExcel()
 	# print opers.get_lines()
-	print opers.get_cell_value(0,5)
+	print(opers.get_cell_value(0,5))

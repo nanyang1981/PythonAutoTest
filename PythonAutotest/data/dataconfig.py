@@ -68,18 +68,19 @@ def get_header_value():
 		'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.92 Safari/537.36'
 	}
 	return header
-
+#携带安全密钥的请求头
 def get_header_value_load():
-	securit_key = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiJqYWRtaW4xIiwiT3JnSUQiOiJvcmcwMDEiLCJDbGllbnRJUCI6IjE5Mi4xNjguMS44MCIsImlhdCI6MTU0NTM1Njg3NH0.b8q9hmXlrrtOuSKbzZgP_IngEzBACIKodC41t2ce2f4'
+	securit_key = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiJqYWRtaW4xIiwiT3JnSUQiOiJvcmcwMDEiLCJDbGllbnRJUCI6IjE5Mi4xNjguMS44OSIsImlhdCI6MTU0NTk3NDc2NH0.lMWySIwUAvYb5W8pVWHJWPjwWHbPx5Wb2345vGq7Zjo"
 	header = {
-		'Host':'192.168.1.11:8050',
-		'Connection':'keep-alive',
-		'Accept':'application/json',
-		'Authorization':securit_key,
-		'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
-		'Content-Type':'application/json',
-		'Referer':'http://192.168.1.11:8050/agents',
-		'Accept-Encoding':'gzip, deflate',
-		'Accept-Language':'zh-CN,zh;q=0.9'
+		"Host":"192.168.1.11:8050",
+		"Connection":"keep-alive",
+		"Accept":"application/json",
+		"Authorization":securit_key,
+		"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36",
+		"Content-Type":"application/json",
+		"Referer":"http://192.168.1.11:8050/monitors",
+		"Accept-Encoding":"gzip, deflate",
+		"Accept-Language":"zh-CN,zh;q=0.9"
 	}
+
 	return header

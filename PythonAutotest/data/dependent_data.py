@@ -5,7 +5,7 @@ sys.path.append('E:/pythonworkspace/PythonAutotest')
 from util.operation_excel import OperationExcel
 from base.run_method import RunMethod
 from data.get_data import GetData
-from jsonpath_rw import jsonpath,parse
+from jsonpath_rw import jsonpath,parse	#parse比对的
 import json
 class DependentData:
 	def __init__(self,case_id):
@@ -20,7 +20,7 @@ class DependentData:
 		return rows_data
 
 
-	#执行依赖测试，获取结果
+	#执行依赖测试，获取结果(不管被依赖的测试是否执行，只要被依赖，都得执行)
 	def run_dependent(self):
 		row_num = self.opera_excel.get_row_num(self.case_id)
 		request_data = self.data.get_data_for_json(row_num)
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 			"status": 1, 
 			"timestamp": 1507979239100
 		}
-	res = "data.out_trade_no"
+	res = "data.sign_type"
 	json_exe = parse(res)
 	madle = json_exe.find(order)
-	print [math.value for math in madle][0]
+	print([math.value for math in madle][0])
